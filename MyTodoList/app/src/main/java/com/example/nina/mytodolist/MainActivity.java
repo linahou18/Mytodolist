@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,9 +37,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
         //setupUI(mockData());
 
+        loadData();
+        setupUI(todos);
+    }
+
+    private void setupUI(List<Todo> todos) {
+        setContentView(R.layout.activity_main);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,10 +55,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        loadData();
         adapter = new TodoListAdapter(this, todos);
-        ((ListView) findViewById(R.id.main_list_view)).setAdapter(adapter);
-
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.main_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        //((ListView) findViewById(R.id.main_list_view)).setAdapter(adapter);
     }
 
     @Override
@@ -82,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
             todos.add(todo);
         }
 
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
         ModelUtils.save(this, TODOS, todos);
+        setupUI(todos);
+
     }
 
     public void updateTodo(int index, boolean done) {
@@ -102,8 +113,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
         ModelUtils.save(this,TODOS, todos);
+        setupUI(todos);
     }
 
     private void loadData() {
