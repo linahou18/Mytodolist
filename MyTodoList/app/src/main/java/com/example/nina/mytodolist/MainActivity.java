@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
             todos.add(todo);
         }
 
-        //adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
         ModelUtils.save(this, TODOS, todos);
-        setupUI(todos);
+        //setupUI(todos);
 
     }
 
@@ -113,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        //adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
         ModelUtils.save(this,TODOS, todos);
-        setupUI(todos);
+        //setupUI(todos);
     }
 
     private void loadData() {
