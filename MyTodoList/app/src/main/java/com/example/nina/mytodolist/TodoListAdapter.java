@@ -84,9 +84,9 @@ public class TodoListAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final Todo todo = data.get(position);
-        ((TodoListViewHolder) holder).todoText.setText(todo.text);
-        ((TodoListViewHolder) holder).doneCheckbox.setChecked(todo.done);
-        UIUtils.setTextViewStrikeThrough(((TodoListViewHolder) holder).todoText, todo.done);
+//        ((TodoListViewHolder) holder).todoText.setText(todo.text);
+//        ((TodoListViewHolder) holder).doneCheckbox.setChecked(todo.done);
+//        UIUtils.setTextViewStrikeThrough(((TodoListViewHolder) holder).todoText, todo.done);
 
         ((TodoListViewHolder) holder).doneCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -105,6 +105,9 @@ public class TodoListAdapter extends RecyclerView.Adapter {
                 activity.startActivityForResult(intent, MainActivity.REQ_CODE_TODO_EDIT);
             }
         });
+        ((TodoListViewHolder) holder).todoText.setText(todo.text);
+        ((TodoListViewHolder) holder).doneCheckbox.setChecked(todo.done);
+        UIUtils.setTextViewStrikeThrough(((TodoListViewHolder) holder).todoText, todo.done);
     }
 
     @Override
